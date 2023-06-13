@@ -1,11 +1,13 @@
-# Get Started
-[Paper](https://arxiv.org/abs/2305.17382) | [Workshop Link](https://sites.google.com/view/vand-cvpr23/home) | [Challenge Link](https://sites.google.com/view/vand-cvpr23/challenge?authuser=0)
+
+[Workshop Link](https://sites.google.com/view/vand-cvpr23/home) | [Challenge Link](https://sites.google.com/view/vand-cvpr23/challenge?authuser=0) | [Report Paper](https://arxiv.org/abs/2305.17382)
+---
 
 This repository contains the official PyTorch implementation of [Zero-/Few-shot Anomaly Classification and Segmentation Method](https://arxiv.org/abs/2305.17382) used in the [CVPR 2023 VAND Challenge](https://sites.google.com/view/vand-cvpr23/challenge?authuser=0), which can be viewd as an improved version of [WinCLIP](https://arxiv.org/abs/2303.14814). We achieve **Winner** in the Zero-shot Track and **Honorable Mentions** in the Few-shot Track.
 
+# Get Started
 ## Installation
 
-- Prepare experimental environment
+- Prepare experimental environments
 
   ```shell
   pip install -r requirements.txt
@@ -68,7 +70,7 @@ Then run the following command
   ```
 
 ## Test
-### pretrained models
+### Pretrained Models
 We provide our pre-trained models in `exps/pretrained`, where `mvtec_pretrained.pth` represents the model trained on the MVTec AD dataset and `visa_pretrained.pth` represents the model trained on the VisA dataset.
 
 Set parameters in `test_zero_shot.sh`.
@@ -92,7 +94,7 @@ Then, run the following command to test them in the few-shot setting:
   sh test_few_shot.sh
   ```
 
-### zero-shot
+### Zero-shot Setting
 Set parameters in `test_zero_shot.sh`.
 - `data_path`: the path to the test dataset
 - `dataset`: name of the test dataset, optional: mvtec, visa
@@ -108,7 +110,7 @@ Then run the following command
   sh test_zero_shot.sh
   ```
 
-### few-shot
+### Few-shot Setting
 Set parameters in `test_few_shot.sh`.
 - `data_path`: the path to the test dataset
 - `dataset`: name of the test dataset, optional: mvtec, visa
