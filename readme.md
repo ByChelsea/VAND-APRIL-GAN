@@ -1,4 +1,5 @@
 # Get Started
+<sub>[Paper](https://arxiv.org/abs/2305.17382) | [Challenge Link](https://sites.google.com/view/vand-cvpr23/challenge?authuser=0) </sub>
 
 ## Installation
 
