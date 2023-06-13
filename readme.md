@@ -1,6 +1,8 @@
 # Get Started
 [Paper](https://arxiv.org/abs/2305.17382) | [Challenge Link](https://sites.google.com/view/vand-cvpr23/challenge?authuser=0)
 
+This repository contains the official implementation of zero-/few-shot anomaly classification and segmentation method used in the VAND Challenge. We achieved first place in the zero-shot track and fourth place in the few-shot track.
+
 ## Installation
 
 - Prepare experimental environment
