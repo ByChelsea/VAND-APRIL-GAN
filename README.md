@@ -1,7 +1,7 @@
 # Get Started
-[Paper](https://arxiv.org/abs/2305.17382) | [Challenge Link](https://sites.google.com/view/vand-cvpr23/challenge?authuser=0)
+[Paper](https://arxiv.org/abs/2305.17382) | [Workshop Link](https://sites.google.com/view/vand-cvpr23/home) | [Challenge Link](https://sites.google.com/view/vand-cvpr23/challenge?authuser=0)
 
-This repository contains the official implementation of zero-/few-shot anomaly classification and segmentation method used in the VAND Challenge. We achieved **first place** in the zero-shot track and **fourth place** in the few-shot track.
+This repository contains the official PyTorch implementation of [Zero-/Few-shot Anomaly Classification and Segmentation Method](https://arxiv.org/abs/2305.17382) used in the [CVPR 2023 VAND Challenge](https://sites.google.com/view/vand-cvpr23/challenge?authuser=0), which can be viewd as an improved version of [WinCLIP](https://arxiv.org/abs/2303.14814). We achieve **Winner** in the Zero-shot Track and **Honorable Mentions** in the Few-shot Track.
 
 ## Installation
 
@@ -126,3 +126,19 @@ Then run the following command
   ```shell
   sh test_few_shot.sh
   ```
+
+## Citation
+If our work is helpful for your research, please consider citing:
+
+```
+@article{chen2023zero,
+  title={A Zero-/Few-Shot Anomaly Classification and Segmentation Method for CVPR 2023 VAND Workshop Challenge Tracks 1\&2: 1st Place on Zero-shot AD and 4th Place on Few-shot AD},
+  author={Chen, Xuhai and Han, Yue and Zhang, Jiangning},
+  journal={arXiv preprint arXiv:2305.17382},
+  year={2023}
+}
+```
+
+## Acknowledgements
+We thank [WinCLIP: Zero-/Few-Shot Anomaly Classification and Segmentation](https://arxiv.org/abs/2303.14814) for providing assistance for our research.
+
