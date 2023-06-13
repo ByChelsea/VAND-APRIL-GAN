@@ -1,8 +1,13 @@
-# Get Started
 
+[Workshop Link](https://sites.google.com/view/vand-cvpr23/home) | [Challenge Link](https://sites.google.com/view/vand-cvpr23/challenge?authuser=0) | [Report Paper](https://arxiv.org/abs/2305.17382)
+---
+
+This repository contains the official PyTorch implementation of [Zero-/Few-shot Anomaly Classification and Segmentation Method](https://arxiv.org/abs/2305.17382) used in the [CVPR 2023 VAND Challenge](https://sites.google.com/view/vand-cvpr23/challenge?authuser=0), which can be viewd as an improved version of [WinCLIP](https://arxiv.org/abs/2303.14814). We achieve **Winner** in the Zero-shot Track and **Honorable Mentions** in the Few-shot Track.
+
+# Get Started
 ## Installation
 
-- Prepare experimental environment
+- Prepare experimental environments
 
   ```shell
   pip install -r requirements.txt
@@ -65,7 +70,7 @@ Then run the following command
   ```
 
 ## Test
-### pretrained models
+### Pretrained Models
 We provide our pre-trained models in `exps/pretrained`, where `mvtec_pretrained.pth` represents the model trained on the MVTec AD dataset and `visa_pretrained.pth` represents the model trained on the VisA dataset.
 
 Set parameters in `test_zero_shot.sh`.
@@ -89,7 +94,7 @@ Then, run the following command to test them in the few-shot setting:
   sh test_few_shot.sh
   ```
 
-### zero-shot
+### Zero-shot Setting
 Set parameters in `test_zero_shot.sh`.
 - `data_path`: the path to the test dataset
 - `dataset`: name of the test dataset, optional: mvtec, visa
@@ -105,7 +110,7 @@ Then run the following command
   sh test_zero_shot.sh
   ```
 
-### few-shot
+### Few-shot Setting
 Set parameters in `test_few_shot.sh`.
 - `data_path`: the path to the test dataset
 - `dataset`: name of the test dataset, optional: mvtec, visa
@@ -123,3 +128,19 @@ Then run the following command
   ```shell
   sh test_few_shot.sh
   ```
+
+## Citation
+If our work is helpful for your research, please consider citing:
+
+```
+@article{chen2023zero,
+  title={A Zero-/Few-Shot Anomaly Classification and Segmentation Method for CVPR 2023 VAND Workshop Challenge Tracks 1\&2: 1st Place on Zero-shot AD and 4th Place on Few-shot AD},
+  author={Chen, Xuhai and Han, Yue and Zhang, Jiangning},
+  journal={arXiv preprint arXiv:2305.17382},
+  year={2023}
+}
+```
+
+## Acknowledgements
+We thank [WinCLIP: Zero-/Few-Shot Anomaly Classification and Segmentation](https://arxiv.org/abs/2303.14814) for providing assistance for our research.
+
