@@ -6,6 +6,10 @@ This repository contains the official PyTorch implementation of [Zero-/Few-shot 
 
 <img src="illustration/main.png" alt="Model Structure" style="max-width: 50px; height: auto;">
 
+**Results on the Challenge official test set**
+
+<img src="illustration/results.png" alt="Model Structure" style="max-width: 50px; height: auto;">
+
 ## Installation
 
 - Prepare experimental environments
