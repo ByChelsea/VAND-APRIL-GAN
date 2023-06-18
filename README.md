@@ -1,6 +1,3 @@
- :rocket:  :rocket:  :rocket: **News**:
-  - According to the [meeting schedule](https://sites.google.com/view/vand-cvpr23/schedule?authuser=0), we will have a **video meeting chat** on June 18th from 10:10 AM to 10:55 AM (Vancouver time). I have booked a [Zoom meeting](https://us05web.zoom.us/j/9202082067?pwd=VmNNQ1pMbzcraU96SWVsQ3loRTRqUT09) from 10:15 AM to 11:00 AM. If you are interested in our work, please feel free to come and chat with us! :)
-
 [Workshop Link](https://sites.google.com/view/vand-cvpr23/home) | [Challenge Link](https://sites.google.com/view/vand-cvpr23/challenge?authuser=0) | [Report Paper](https://arxiv.org/abs/2305.17382)
 ---
 [Xuhai Chen](https://scholar.google.com.hk/citations?user=LU4etJ0AAAAJ&hl=zh-CN&authuser=1) · [Yue Han](https://scholar.google.com/citations?hl=en&user=08E500gAAAAJ&view_op=list_works&gmla=AHoSzlVzTXnclaPp9h1g8xAZQBrsxdFXvhunMA3AmRm_GSLnZA1956xavx6hmPaCFCysonsXeTQyhB_cokdUFacUc5HBunMPW-uOtLZLTTufiZiHB6hAVgr9l7cJ_UHKeQ) · [Jiangning Zhang](https://zhangzjn.github.io/)
