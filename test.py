@@ -144,7 +144,7 @@ def test(args):
     results['pr_sp'] = []
     for items in test_dataloader:
         image = items['img'].to(device)
-        cls_name = items['cls_name'][0]
+        cls_name = items['cls_name']
         results['cls_names'].append(cls_name)
         gt_mask = items['img_mask']
         gt_mask[gt_mask > 0.5], gt_mask[gt_mask <= 0.5] = 1, 0
@@ -153,11 +153,11 @@ def test(args):
 
         with torch.no_grad(), torch.cuda.amp.autocast():
             image_features, patch_tokens = model.encode_image(image, features_list)
-            text_features = encode_text_with_prompt_ensemble(model, [cls_name], device)
+            text_features = encode_text_with_prompt_ensemble(model, cls_name, device)
             image_features /= image_features.norm(dim=-1, keepdim=True)
 
             # sample
-            text_probs = (100.0 * image_features @ text_features.T).softmax(dim=-1)
+            text_probs = (100.0 * image_features @ text_features[0]).softmax(dim=-1)
             results['pr_sp'].append(text_probs[0][1].cpu().item())
 
             # pixel
@@ -165,7 +165,7 @@ def test(args):
             anomaly_maps = []
             for layer in range(len(patch_tokens)):
                 patch_tokens[layer] /= patch_tokens[layer].norm(dim=-1, keepdim=True)
-                anomaly_map = (100.0 * patch_tokens[layer] @ text_features.T)
+                anomaly_map = (100.0 * patch_tokens[layer] @ text_features)
                 B, L, C = anomaly_map.shape
                 H = int(np.sqrt(L))
                 anomaly_map = F.interpolate(anomaly_map.permute(0, 2, 1).view(B, 2, H, H),

@@ -101,18 +101,18 @@ def train(args):
         for items in train_dataloader:
             idx += 1
             image = items['img'].to(device)
-            cls_name = items['cls_name'][0]
+            cls_name = items['cls_name']
             with torch.cuda.amp.autocast():
                 with torch.no_grad():
                     image_features, patch_tokens = model.encode_image(image, features_list)
-                    text_features = encode_text_with_prompt_ensemble(model, [cls_name], device)
+                    text_features = encode_text_with_prompt_ensemble(model, cls_name, device)
 
                 # pixel level
                 patch_tokens = trainable_layer(patch_tokens)
                 anomaly_maps = []
                 for layer in range(len(patch_tokens)):
                     patch_tokens[layer] /= patch_tokens[layer].norm(dim=-1, keepdim=True)
-                    anomaly_map = (100.0 * patch_tokens[layer] @ text_features.T)
+                    anomaly_map = (100.0 * patch_tokens[layer] @ text_features)
                     B, L, C = anomaly_map.shape
                     H = int(np.sqrt(L))
                     anomaly_map = F.interpolate(anomaly_map.permute(0, 2, 1).view(B, 2, H, H),
