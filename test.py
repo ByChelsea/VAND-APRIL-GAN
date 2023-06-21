@@ -199,7 +199,7 @@ def test(args):
             mask = normalize(anomaly_map[0])
             vis = apply_ad_scoremap(vis, mask)
             vis = cv2.cvtColor(vis, cv2.COLOR_RGB2BGR)  # BGR
-            save_vis = os.path.join(save_path, 'imgs', cls_name, cls)
+            save_vis = os.path.join(save_path, 'imgs', cls_name[0], cls)
             if not os.path.exists(save_vis):
                 os.makedirs(save_vis)
             cv2.imwrite(os.path.join(save_vis, filename), vis)
