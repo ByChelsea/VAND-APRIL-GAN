@@ -145,7 +145,7 @@ def test(args):
     for items in test_dataloader:
         image = items['img'].to(device)
         cls_name = items['cls_name']
-        results['cls_names'].append(cls_name)
+        results['cls_names'].append(cls_name[0])
         gt_mask = items['img_mask']
         gt_mask[gt_mask > 0.5], gt_mask[gt_mask <= 0.5] = 1, 0
         results['imgs_masks'].append(gt_mask)  # px
@@ -179,7 +179,7 @@ def test(args):
                 image_features, patch_tokens = model.encode_image(image, few_shot_features)
                 anomaly_maps_few_shot = []
                 for layer in range(len(patch_tokens)):
-                    cos = pairwise.cosine_similarity(normal_features_ls[cls_name][layer].cpu(),
+                    cos = pairwise.cosine_similarity(normal_features_ls[cls_name[0]][layer].cpu(),
                                                      patch_tokens[layer][0, 1:, :].cpu())
                     height = int(np.sqrt(cos.shape[1]))
                     anomaly_map_few_shot = np.min((1 - cos), 0).reshape(1, 1, height, height)
