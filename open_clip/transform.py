@@ -122,8 +122,8 @@ def image_transform(
             ]
         else:
             transforms = [
-                Resize(image_size, interpolation=InterpolationMode.BICUBIC),
-                CenterCrop(image_size),
+                Resize((image_size, image_size), interpolation=InterpolationMode.BICUBIC),
+                CenterCrop((image_size, image_size)),
             ]
         transforms.extend([
             _convert_to_rgb,
