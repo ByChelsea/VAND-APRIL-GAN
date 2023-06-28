@@ -104,10 +104,17 @@ def test(args):
     console_handler.setFormatter(formatter)
     logger.addHandler(console_handler)
 
+    # record parameters
+    for arg in vars(args):
+        if args.mode == 'zero_shot' and (arg == 'k_shot' or arg == 'few_shot_features'):
+            continue
+        logger.info(f'{arg}: {getattr(args, arg)}')
+
     # seg
     with open(args.config_path, 'r') as f:
         model_configs = json.load(f)
-    linearlayer = LinearLayer(model_configs['vision_cfg']['width'], model_configs['embed_dim'], len(features_list)).to(device)
+    linearlayer = LinearLayer(model_configs['vision_cfg']['width'], model_configs['embed_dim'],
+                              len(features_list), args.model).to(device)
     checkpoint = torch.load(args.checkpoint_path)
     linearlayer.load_state_dict(checkpoint["trainable_linearlayer"])
 
@@ -117,19 +124,13 @@ def test(args):
             transforms.CenterCrop(img_size),
             transforms.ToTensor()
         ])
-    preprocess.transforms[0] = transforms.Resize(size=(img_size, img_size), interpolation=transforms.InterpolationMode.BICUBIC,
-                                                 max_size=None, antialias=None)
-    preprocess.transforms[1] = transforms.CenterCrop(size=(img_size, img_size))
     if dataset_name == 'mvtec':
-        obj_list = ['carpet', 'bottle', 'hazelnut', 'leather', 'cable', 'capsule', 'grid', 'pill',
-                    'transistor', 'metal_nut', 'screw', 'toothbrush', 'zipper', 'tile', 'wood']
         test_data = MVTecDataset(root=dataset_dir, transform=preprocess, target_transform=transform,
                                  aug_rate=-1, mode='test')
     else:
-        obj_list = ['candle', 'capsules', 'cashew', 'chewinggum', 'fryum', 'macaroni1', 'macaroni2',
-                    'pcb1', 'pcb2', 'pcb3', 'pcb4', 'pipe_fryum']
         test_data = VisaDataset(root=dataset_dir, transform=preprocess, target_transform=transform, mode='test')
     test_dataloader = torch.utils.data.DataLoader(test_data, batch_size=1, shuffle=False)
+    obj_list = test_data.get_cls_names()
 
     # few shot
     if args.mode == 'few_shot':
@@ -153,7 +154,7 @@ def test(args):
 
         with torch.no_grad(), torch.cuda.amp.autocast():
             image_features, patch_tokens = model.encode_image(image, features_list)
-            text_features = encode_text_with_prompt_ensemble(model, cls_name, device)
+            text_features = encode_text_with_prompt_ensemble(model, cls_name, tokenizer, device)
             image_features /= image_features.norm(dim=-1, keepdim=True)
 
             # sample
@@ -299,7 +300,7 @@ if __name__ == '__main__':
     parser.add_argument("--image_size", type=int, default=224, help="image size")
     parser.add_argument("--mode", type=str, default="zero_shot", help="zero shot or few shot")
     # few shot
-    parser.add_argument("--k_shot", type=int, default=10, help="10-shot, 5-shot, 1-shot")
+    parser.add_argument("--k_shot", type=int, default=10, help="e.g., 10-shot, 5-shot, 1-shot")
     parser.add_argument("--seed", type=int, default=10, help="random seed")
     args = parser.parse_args()
 

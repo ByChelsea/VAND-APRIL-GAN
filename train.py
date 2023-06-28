@@ -66,17 +66,17 @@ def train(args):
     console_handler.setFormatter(formatter)
     logger.addHandler(console_handler)
 
+    # record parameters
+    for arg in vars(args):
+        logger.info(f'{arg}: {getattr(args, arg)}')
+
     # transforms
     transform = transforms.Compose([
         transforms.Resize((image_size, image_size)),
         transforms.CenterCrop(image_size),
         transforms.ToTensor()
     ])
-    preprocess.transforms[0] = transforms.Resize(size=(image_size, image_size),
-                                                 interpolation=transforms.InterpolationMode.BICUBIC,
-                                                 max_size=None, antialias=None)
-    preprocess.transforms[1] = transforms.CenterCrop(size=(image_size, image_size))
-
+    
     # datasets
     if args.dataset == 'mvtec':
         train_data = MVTecDataset(root=args.train_data_path, transform=preprocess, target_transform=transform,
@@ -87,7 +87,7 @@ def train(args):
 
     # linear layer
     trainable_layer = LinearLayer(model_configs['vision_cfg']['width'], model_configs['embed_dim'],
-                                  len(args.features_list)).to(device)
+                                  len(args.features_list), args.model).to(device)
 
     optimizer = torch.optim.Adam(list(trainable_layer.parameters()), lr=learning_rate, betas=(0.5, 0.999))
 
@@ -105,7 +105,7 @@ def train(args):
             with torch.cuda.amp.autocast():
                 with torch.no_grad():
                     image_features, patch_tokens = model.encode_image(image, features_list)
-                    text_features = encode_text_with_prompt_ensemble(model, cls_name, device)
+                    text_features = encode_text_with_prompt_ensemble(model, cls_name, tokenizer, device)
 
                 # pixel level
                 patch_tokens = trainable_layer(patch_tokens)

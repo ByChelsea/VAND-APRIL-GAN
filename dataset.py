@@ -38,6 +38,9 @@ class VisaDataset(data.Dataset):
 	def __len__(self):
 		return self.length
 
+	def get_cls_names(self):
+		return self.cls_names
+
 	def __getitem__(self, index):
 		data = self.data_all[index]
 		img_path, mask_path, cls_name, specie_name, anomaly = data['img_path'], data['mask_path'], data['cls_name'], \
@@ -88,6 +91,9 @@ class MVTecDataset(data.Dataset):
 
 	def __len__(self):
 		return self.length
+
+	def get_cls_names(self):
+		return self.cls_names
 
 	def combine_img(self, cls_name):
 		img_paths = os.path.join(self.root, cls_name, 'test')
