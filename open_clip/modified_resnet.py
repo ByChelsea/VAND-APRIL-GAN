@@ -170,22 +170,17 @@ class ModifiedResNet(nn.Module):
         x = self.avgpool(x)
         return x
 
-    def forward(self, x):
-        out_tokens = []
+    def forward(self, x, out_blocks):
         x = self.stem(x)
-        # torch.Size([16, 64, 56, 56])
-        x = self.layer1(x)
-        out_tokens.append(x)
-        # torch.Size([16, 256, 56, 56])
-        x = self.layer2(x)
-        out_tokens.append(x)
-        # torch.Size([16, 512, 28, 28])
-        x = self.layer3(x)
-        out_tokens.append(x)
-        # torch.Size([16, 1024, 14, 14])
-        x = self.layer4(x)
-        # torch.Size([16, 2048, 7, 7])
-        x = self.attnpool(x)
-        # torch.Size([16, 1024])
+        x_1 = self.layer1(x)
+        x_2 = self.layer2(x_1)
+        x_3 = self.layer3(x_2)
+        x_4 = self.layer4(x_3)
+        x = self.attnpool(x_4)
+
+        out_tokens = []
+        x_blocks = [x_1, x_2, x_3, x_4]
+        for i in out_blocks:
+            out_tokens.append(x_blocks[i - 1])
 
         return x, out_tokens
