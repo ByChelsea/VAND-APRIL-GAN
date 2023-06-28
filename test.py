@@ -134,8 +134,8 @@ def test(args):
 
     # few shot
     if args.mode == 'few_shot':
-        normal_features_ls = memory(model, obj_list, dataset_dir, save_path, preprocess, transform,
-                                    args.k_shot, few_shot_features, dataset_name, device)
+        mem_features = memory(args.model, model, obj_list, dataset_dir, save_path, preprocess, transform,
+                              args.k_shot, few_shot_features, dataset_name, device)
 
     results = {}
     results['cls_names'] = []
@@ -179,9 +179,12 @@ def test(args):
             if args.mode == 'few_shot':
                 image_features, patch_tokens = model.encode_image(image, few_shot_features)
                 anomaly_maps_few_shot = []
-                for layer in range(len(patch_tokens)):
-                    cos = pairwise.cosine_similarity(normal_features_ls[cls_name[0]][layer].cpu(),
-                                                     patch_tokens[layer][0, 1:, :].cpu())
+                for idx, p in enumerate(patch_tokens):
+                    if 'ViT' in args.model:
+                        p = p[0, 1:, :]
+                    else:
+                        p = p[0].view(p.shape[1], -1).permute(1, 0).contiguous()
+                    cos = pairwise.cosine_similarity(mem_features[cls_name[0]][idx].cpu(), p.cpu())
                     height = int(np.sqrt(cos.shape[1]))
                     anomaly_map_few_shot = np.min((1 - cos), 0).reshape(1, 1, height, height)
                     anomaly_map_few_shot = F.interpolate(torch.tensor(anomaly_map_few_shot),
