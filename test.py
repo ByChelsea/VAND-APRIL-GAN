@@ -137,6 +137,10 @@ def test(args):
         mem_features = memory(args.model, model, obj_list, dataset_dir, save_path, preprocess, transform,
                               args.k_shot, few_shot_features, dataset_name, device)
 
+    # text prompt
+    with torch.cuda.amp.autocast(), torch.no_grad():
+        text_prompts = encode_text_with_prompt_ensemble(model, obj_list, tokenizer, device)
+
     results = {}
     results['cls_names'] = []
     results['imgs_masks'] = []
@@ -154,8 +158,11 @@ def test(args):
 
         with torch.no_grad(), torch.cuda.amp.autocast():
             image_features, patch_tokens = model.encode_image(image, features_list)
-            text_features = encode_text_with_prompt_ensemble(model, cls_name, tokenizer, device)
             image_features /= image_features.norm(dim=-1, keepdim=True)
+            text_features = []
+            for cls in cls_name:
+                text_features.append(text_prompts[cls])
+            text_features = torch.stack(text_features, dim=0)
 
             # sample
             text_probs = (100.0 * image_features @ text_features[0]).softmax(dim=-1)
