@@ -413,7 +413,11 @@ def trace_model(model, batch_size=256, device=torch.device('cpu')):
 
 def resize_pos_embed(state_dict, model, interpolation: str = 'bicubic', antialias: bool = True):
     # Rescale the grid of position embeddings when loading from state_dict
+    flag = 1
     old_pos_embed = state_dict.get('visual.positional_embedding', None)
+    if old_pos_embed is None:
+        flag = 0
+        old_pos_embed = state_dict.get('visual.attnpool.positional_embedding', None)
     if old_pos_embed is None or not hasattr(model.visual, 'grid_size'):
         return
     grid_size = to_2tuple(model.visual.grid_size)
@@ -442,4 +446,7 @@ def resize_pos_embed(state_dict, model, interpolation: str = 'bicubic', antialia
         new_pos_embed = torch.cat([pos_emb_tok, pos_emb_img], dim=0)
     else:
         new_pos_embed = pos_emb_img
-    state_dict['visual.positional_embedding'] = new_pos_embed
+    if flag:
+        state_dict['visual.positional_embedding'] = new_pos_embed
+    else:
+        state_dict['visual.attnpool.positional_embedding'] = new_pos_embed
