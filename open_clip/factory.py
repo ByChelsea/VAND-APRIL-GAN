@@ -3,6 +3,7 @@ import logging
 import os
 import pathlib
 import re
+import numpy as np
 from copy import deepcopy
 from pathlib import Path
 from typing import Any, Dict, Optional, Tuple, Union
@@ -161,6 +162,9 @@ def create_model(
                 model_pre.output_dict = True
 
             model = CLIP(**model_cfg, cast_dtype=cast_dtype)
+            ### for resnet
+            if not hasattr(model.visual, 'grid_size'):
+                model.visual.grid_size = int(np.sqrt(model.visual.attnpool.positional_embedding.shape[0] - 1))
             resize_pos_embed(state_dict, model)
             incompatible_keys = model.load_state_dict(state_dict, strict=True)
             model.to(device=device)
