@@ -21,7 +21,7 @@ This repository contains the official PyTorch implementation of [Zero-/Few-shot 
 ## Dataset Preparation 
 ### MVTec AD
 - Download and extract [MVTec AD](https://www.mvtec.com/company/research/datasets/mvtec-ad) into `data/mvtec`
-- run`python data/gen_benchmark/mvtec.py` to obtain `data/mvtec/meta.json`
+- run`python data/mvtec.py` to obtain `data/mvtec/meta.json`
 ```
 data
 ├── mvtec
@@ -42,7 +42,7 @@ data
 
 ### VisA
 - Download and extract [VisA](https://amazon-visual-anomaly.s3.us-west-2.amazonaws.com/VisA_20220922.tar) into `data/visa`
-- run`python data/gen_benchmark/visa.py` to obtain `data/visa/meta.json`
+- run`python data/visa.py` to obtain `data/visa/meta.json`
 ```
 data
 ├── visa
