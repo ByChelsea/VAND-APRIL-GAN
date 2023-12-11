@@ -8,13 +8,13 @@ import os
 
 
 class VisaDataset(data.Dataset):
-	def __init__(self, root, transform, target_transform, mode='test', k_shot=0, save_dir=None, obj_name=None):
+	def __init__(self, root, transform, target_transform, meta="meta.json", mode='test', k_shot=0, save_dir=None, obj_name=None):
 		self.root = root
 		self.transform = transform
 		self.target_transform = target_transform
 
 		self.data_all = []
-		meta_info = json.load(open(f'{self.root}/meta.json', 'r'))
+		meta_info = json.load(open(f'{self.root}/{meta}', 'r'))
 		name = self.root.split('/')[-1]
 		meta_info = meta_info[mode]
 
@@ -61,14 +61,14 @@ class VisaDataset(data.Dataset):
 
 
 class MVTecDataset(data.Dataset):
-	def __init__(self, root, transform, target_transform, aug_rate, mode='test', k_shot=0, save_dir=None, obj_name=None):
+	def __init__(self, root, transform, target_transform, aug_rate, meta="meta.json", mode='test', k_shot=0, save_dir=None, obj_name=None):
 		self.root = root
 		self.transform = transform
 		self.target_transform = target_transform
 		self.aug_rate = aug_rate
 
 		self.data_all = []
-		meta_info = json.load(open(f'{self.root}/meta.json', 'r'))
+		meta_info = json.load(open(f'{self.root}/{meta}', 'r'))
 		name = self.root.split('/')[-1]
 		meta_info = meta_info[mode]
 
