@@ -75,13 +75,13 @@ def test_single_image(image_path, model_path, config_path, output_path):
 if __name__ == '__main__':
     import argparse
     parser = argparse.ArgumentParser()
-    parser.add_argument('--image_path', type=str, default='/home/ps/few-shot-research/AdaCLIP/test_image/006.jpg', 
+    parser.add_argument('--image_path', type=str, default='', 
                        help='Path to the input image (default: ./test_image.jpg)')
     parser.add_argument('--model_path', type=str, 
-                       default='/home/ps/few-shot-research/VAND-APRIL-GAN/exps/pretrained/visa_pretrained.pth',
+                       default='',
                        help='Path to the trained model (default: ./exps/pretrained/mvtec_pretrained.pth)')
     parser.add_argument('--config_path', type=str, 
-                       default='/home/ps/few-shot-research/VAND-APRIL-GAN/open_clip/model_configs/ViT-L-14-336.json',
+                       default='',
                        help='Path to model config (default: ./open_clip/model_configs/ViT-L-14-336.json)')
     parser.add_argument('--output_path', type=str, default='./results', 
                        help='Path to save results (default: ./results/custom)')
