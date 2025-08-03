@@ -81,8 +81,13 @@ def train(args):
     if args.dataset == 'mvtec':
         train_data = MVTecDataset(root=args.train_data_path, transform=preprocess, target_transform=transform,
                                   aug_rate=args.aug_rate)
-    else:
+    elif args.dataset == 'visa':
         train_data = VisaDataset(root=args.train_data_path, transform=preprocess, target_transform=transform)
+    else:
+        # train_data = MVTecDataset(root=args.train_data_path, transform=preprocess, target_transform=transform,
+        #                           meta=args.dataset, aug_rate=args.aug_rate)
+        train_data = VisaDataset(root=args.train_data_path, transform=preprocess, target_transform=transform,
+                                 meta=args.dataset)
     train_dataloader = torch.utils.data.DataLoader(train_data, batch_size=batch_size, shuffle=True)
 
     # linear layer
