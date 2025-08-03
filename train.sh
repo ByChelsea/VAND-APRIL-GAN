@@ -1,13 +1,13 @@
 ### train on the MVTec AD dataset
-python train.py --dataset mvtec --train_data_path ./data/mvtec \
+python train.py --dataset mvtec --train_data_path /home/ps/few-shot-research/MVTec \
 --save_path ./exps/visa/vit_large_14_518 --config_path ./open_clip/model_configs/ViT-L-14-336.json --model ViT-L-14-336 \
---features_list 6 12 18 24 --pretrained openai --image_size 518  --batch_size 8 --aug_rate 0.2 --print_freq 1 \
+--features_list 6 12 18 24 --pretrained openai --image_size 518  --batch_size 64 --aug_rate 0.2 --print_freq 1 \
 --epoch 3 --save_freq 1
 
 
 ### train on the VisA dataset
-python train.py --dataset visa --train_data_path ./data/visa \
+python train.py --dataset visa --train_data_path /home/ps/few-shot-research/VisA_20220922 \
 --save_path ./exps/mvtec/vit_large_14_518 --config_path ./open_clip/model_configs/ViT-L-14-336.json --model ViT-L-14-336 \
---features_list 6 12 18 24 --pretrained openai --image_size 518  --batch_size 8 --print_freq 1 \
+--features_list 6 12 18 24 --pretrained openai --image_size 518  --batch_size 64 --print_freq 1 \
 --epoch 15 --save_freq 1
 
