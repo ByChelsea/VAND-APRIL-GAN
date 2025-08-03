@@ -1,0 +1,29 @@
+25-08-03 15:52:38.453 - INFO: train_data_path: /home/ps/few-shot-research/VisA_20220922
+25-08-03 15:52:38.453 - INFO: save_path: ./exps/mvtec/vit_large_14_518
+25-08-03 15:52:38.453 - INFO: config_path: ./open_clip/model_configs/ViT-L-14-336.json
+25-08-03 15:52:38.453 - INFO: dataset: visa
+25-08-03 15:52:38.453 - INFO: model: ViT-L-14-336
+25-08-03 15:52:38.453 - INFO: pretrained: openai
+25-08-03 15:52:38.453 - INFO: features_list: [6, 12, 18, 24]
+25-08-03 15:52:38.453 - INFO: epoch: 15
+25-08-03 15:52:38.453 - INFO: learning_rate: 0.001
+25-08-03 15:52:38.453 - INFO: batch_size: 8
+25-08-03 15:52:38.453 - INFO: image_size: 518
+25-08-03 15:52:38.453 - INFO: aug_rate: 0.2
+25-08-03 15:52:38.453 - INFO: print_freq: 1
+25-08-03 15:52:38.453 - INFO: save_freq: 1
+25-08-03 15:55:14.668 - INFO: epoch [1/15], loss:2.4189
+25-08-03 15:57:46.082 - INFO: epoch [2/15], loss:1.9677
+25-08-03 16:00:17.146 - INFO: epoch [3/15], loss:1.8924
+25-08-03 16:02:48.481 - INFO: epoch [4/15], loss:1.8430
+25-08-03 16:05:19.544 - INFO: epoch [5/15], loss:1.8061
+25-08-03 16:07:51.091 - INFO: epoch [6/15], loss:1.7761
+25-08-03 16:10:22.404 - INFO: epoch [7/15], loss:1.7407
+25-08-03 16:12:53.525 - INFO: epoch [8/15], loss:1.7251
+25-08-03 16:15:24.641 - INFO: epoch [9/15], loss:1.7104
+25-08-03 16:17:56.225 - INFO: epoch [10/15], loss:1.7007
+25-08-03 16:20:28.007 - INFO: epoch [11/15], loss:1.6705
+25-08-03 16:22:59.224 - INFO: epoch [12/15], loss:1.6605
+25-08-03 16:25:30.847 - INFO: epoch [13/15], loss:1.6521
+25-08-03 16:28:02.317 - INFO: epoch [14/15], loss:1.6338
+25-08-03 16:30:33.842 - INFO: epoch [15/15], loss:1.6194
